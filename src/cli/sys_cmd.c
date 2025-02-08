@@ -30,7 +30,6 @@
 #include <string.h>
 #include "sys_cmd.h"
 
-
 /*-----------------------------------------------------------*/
 static unsigned int cli_no_of_commands;
 
@@ -43,7 +42,6 @@ void cli_init( void )
   cli_no_of_commands = i;
 }
 
-
 /*-----------------------------------------------------------*/
 static int cmd_cmp( const void *e1, const void *e2 )
 {
@@ -52,7 +50,6 @@ static int cmd_cmp( const void *e1, const void *e2 )
 
   return strncmp( p_cmd_1->cmd, p_cmd_2->cmd, MAX_CMD_LENGTH );
 }
-
 
 /*-----------------------------------------------------------*/
 cli_cmd_tab_t *cli_find_command( cli_cmd_tab_t *cmd_to_check )
@@ -64,7 +61,6 @@ cli_cmd_tab_t *cli_find_command( cli_cmd_tab_t *cmd_to_check )
   return(cli_cmd);
 }
 
-
 /*-----------------------------------------------------------*/
 static char func_help( const unsigned char argc, const char *argv[] )
 {
@@ -75,11 +71,10 @@ static char func_help( const unsigned char argc, const char *argv[] )
   PRINTF_MACRO( "Commands:\r\n" );
 
   for( i = 0; i < cli_no_of_commands; i++ )
-    puts( cli_commands[i].help_string );
+    PRINTF_MACRO("%-10s %s\r\n", cli_commands[i].cmd, cli_commands[i].help_string);
 
   return EXIT_SUCCESS;
 }
-
 
 /*-----------------------------------------------------------*/
 static char func_comment( const unsigned char argc, const char *argv[] )
@@ -87,7 +82,6 @@ static char func_comment( const unsigned char argc, const char *argv[] )
   PRINTF_MACRO( "# > ");
   return EXIT_SUCCESS;
 }
-
 
 /*-----------------------------------------------------------*/
 static char func_peek( const unsigned char argc, const char *argv[] )
@@ -98,7 +92,6 @@ static char func_peek( const unsigned char argc, const char *argv[] )
 
   return EXIT_SUCCESS;
 }
-
 
 /*-----------------------------------------------------------*/
 static char func_poke( const unsigned char argc, const char *argv[] )
@@ -112,7 +105,6 @@ static char func_poke( const unsigned char argc, const char *argv[] )
 
   return EXIT_SUCCESS;
 }
-
 
 /*-----------------------------------------------------------*/
 #include "memtest.h"
@@ -135,14 +127,12 @@ static char func_memtest( const unsigned char argc, const char *argv[] )
   else
     PRINTF_MACRO( "PASSED\r\n" );
 
-
   PRINTF_MACRO( "running memTestAddressBus() ...   " );
 
   if( memTestAddressBus( address, nBytes ) )
     PRINTF_MACRO( "FAILED!!!\r\n" );
   else
     PRINTF_MACRO( "PASSED\r\n" );
-
 
   PRINTF_MACRO( "running memTestDevice() ...   " );
 
@@ -151,12 +141,9 @@ static char func_memtest( const unsigned char argc, const char *argv[] )
   else
     PRINTF_MACRO( "PASSED\r\n" );
 
-    return EXIT_SUCCESS;
+  return EXIT_SUCCESS;
 }
-
 
 /*-----------------------------------------------------------*/
 //  command table
 #include "sys_cmd_table.h"
-
-

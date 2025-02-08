@@ -29,18 +29,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
 #include "sys_cmd.h"
-#include "sys_error.h"
-
-
 
 /*-----------------------------------------------------------*/
 void clear_screen(void)
 {
   PRINTF_MACRO("\033[H\033[J");
 }
-
 
 /*-----------------------------------------------------------*/
 #ifdef ANSI_ESCAPE_CODE
@@ -96,8 +91,8 @@ static char *cli_edit_buffer(char *in_buffer, char *out_buffer, unsigned int lin
       return(NULL);
     }
 
-    if(out_ptr < begin_ptr)
-      sys_error_fatal(FATAL_ERROR_CLI);
+    // if(out_ptr < begin_ptr)
+      // sys_error_fatal(FATAL_ERROR_CLI);
 
     switch(in_buffer[i])
     {
@@ -226,6 +221,7 @@ void sys_cli_task(void)
   for(;;)
   {
     PRINTF_MACRO("\r\n# > ");
+    fflush(stdout);
 
     cli_argc = 0;
     last_return_value = EXIT_SUCCESS;
@@ -271,7 +267,9 @@ void sys_cli_task(void)
         }
       }
 
+      PRINTF_MACRO("\r\n");
       last_return_value = cli_cmd->func(cli_argc, (const char **)cli_argv);
+      fflush(stdout);
       break;
     }
 

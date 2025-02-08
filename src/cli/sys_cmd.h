@@ -25,7 +25,6 @@
 ////                                                              ////
 //////////////////////////////////////////////////////////////////////
 
-
 #ifndef _QAZ_SYS_CMD_H_
 #define _QAZ_SYS_CMD_H_
 
@@ -36,7 +35,7 @@
 // #include <xil_printf.h>
 
 // #define ANSI_ESCAPE_CODE
-#define CLI_ECHO_UART
+// #define CLI_ECHO_UART
 
 // #define PRINTF_MACRO xil_printf
 // #define PRINTF_MACRO iprintf
@@ -53,7 +52,6 @@ typedef struct cli_cmd_tab_t
 
 extern struct cli_cmd_tab_t cli_commands[];
 
-
 /*-----------------------------------------------------------*/
 extern void sys_cli_task(void);
 extern cli_cmd_tab_t *cli_find_command( cli_cmd_tab_t *cmd_to_check);
@@ -61,8 +59,5 @@ extern void cli_init(void);
 extern char func_mw(const unsigned char argc, const char *argv[]);
 extern char func_md(const unsigned char argc, const char *argv[]);
 
-
 /*-----------------------------------------------------------*/
-
-
 #endif  //  _QAZ_SYS_CMD_H_
