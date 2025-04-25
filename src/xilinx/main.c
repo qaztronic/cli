@@ -16,6 +16,6 @@ int main()
   
   sys_cli_task();
   
-  clean_platform();
+  cleanup_platform();
   return 0;
 }
